@@ -34,3 +34,5 @@ Built coursework and personal projects using HTML, CSS, JavaScript, and Python, 
 - Developing stronger cybersecurity knowledge through hands-on practice
 - Improving project quality and code structure
 - Building a stronger portfolio of practical software projects
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/denis-ivanciuc-370980398)
