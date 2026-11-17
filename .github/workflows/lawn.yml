@@ -1,0 +1,44 @@
+# Redraws the "lawn" animation in the README: a snake eating my contribution graph.
+# The two images are published to the `output` branch, which the README links to.
+name: Mow the lawn
+
+on:
+  schedule:
+    - cron: "17 5 * * *" # once a day, 05:17 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/lawn.yml]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lawn
+  cancel-in-progress: true
+
+jobs:
+  mow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # Third-party action, pinned to an exact commit so it cannot change underneath me.
+      - name: Draw the animation
+        uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3.5.0
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/lawn.svg?palette=github-light
+            dist/lawn-dark.svg?palette=github-dark
+
+      - name: Publish to the output branch
+        working-directory: dist
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git init --quiet --initial-branch=output
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lawn.svg lawn-dark.svg
+          git commit --quiet --message "Mow the lawn"
+          git push --force --quiet "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" output
