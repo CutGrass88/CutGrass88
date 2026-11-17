@@ -1,14 +1,14 @@
-# Redraws the "lawn" animation in the README: a snake eating my contribution graph.
+# Redraws the lawn in the README: my recent contributions as a meadow (scripts/lawn.py).
 # The two images are published to the `output` branch, which the README links to.
 name: Mow the lawn
 
 on:
   schedule:
-    - cron: "17 5 * * *" # once a day, 05:17 UTC
+    - cron: "23 */4 * * *" # every four hours, so "last mowed: today" stays true
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [.github/workflows/lawn.yml]
+    paths: [.github/workflows/lawn.yml, scripts/lawn.py]
 
 permissions:
   contents: write
@@ -22,14 +22,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      # Third-party action, pinned to an exact commit so it cannot change underneath me.
-      - name: Draw the animation
-        uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3.5.0
+      # Pinned to an exact commit so it cannot change underneath me.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            dist/lawn.svg?palette=github-light
-            dist/lawn-dark.svg?palette=github-dark
+          persist-credentials: false
+
+      - name: Draw the lawn
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/lawn.py --user "$GITHUB_REPOSITORY_OWNER" --out dist
 
       - name: Publish to the output branch
         working-directory: dist

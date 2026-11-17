@@ -82,10 +82,10 @@ side quest  │  a car mod for a racing sim, built from scratch (private for now
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/CutGrass88/CutGrass88/output/lawn-dark.svg">
-  <img src="https://raw.githubusercontent.com/CutGrass88/CutGrass88/output/lawn.svg" width="100%" alt="My contribution graph being eaten square by square by a snake.">
+  <img src="https://raw.githubusercontent.com/CutGrass88/CutGrass88/output/lawn.svg" width="100%" alt="My last three months of GitHub contributions drawn as a meadow, with a lawn mower. Taller grass means a busier day.">
 </picture>
 
-<sub>My contribution graph, mowed once a day.</sub>
+<sub>My last three months on GitHub. Taller grass is a busier day. If I stop contributing, the mower falls asleep and the weeds move in.</sub>
 
 </div>
 
